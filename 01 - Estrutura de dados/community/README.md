@@ -21,13 +21,9 @@ Este projeto foi desenvolvido como parte do desafio de projeto do Bootcamp NTT D
 ## Como Executar o Projeto
 1. Clone este repositório:
     ```bash
-    git clone https://github.com/OCORUJA/trilha-python-dio.git
+    git clone https://github.com/OCORUJA/trilha-python-dio/tree/feat/community/OCORUJA/01%20-%20Estrutura%20de%20dados/community
     ```
-2. Navegue até o diretório do projeto:
-    ```bash
-    cd community
-    ```
-3. Execute o script Python:
+2. Execute o script Python:
     ```bash
     python community/desafio.py
     ```
