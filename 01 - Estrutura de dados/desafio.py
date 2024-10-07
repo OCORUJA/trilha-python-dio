@@ -4,13 +4,14 @@ import textwrap
 def menu():
     menu = """\n
     ================ MENU ================
-    [d]\tDepositar
-    [s]\tSacar
-    [e]\tExtrato
-    [nc]\tNova conta
-    [lc]\tListar contas
-    [nu]\tNovo usuário
-    [q]\tSair
+    [D/d]\tDepositar
+    [S/s]\tSacar
+    [E/e]\tExtrato
+    [NC/nc]\tNova conta
+    [LC/lc]\tListar contas
+    [LE/le]\tListar contas com dados cadastrais
+    [NU/nu]\tNovo usuário
+    [Q/q]\tSair
     => """
     return input(textwrap.dedent(menu))
 
@@ -101,6 +102,22 @@ def listar_contas(contas):
         """
         print("=" * 100)
         print(textwrap.dedent(linha))
+    
+
+def listar_dados_cadastrais(contas):
+        for conta in contas:
+            linha = f"""\
+                Agência:\t{conta['agencia']}
+                C/C:\t\t{conta['numero_conta']}
+                Titular:\t{conta['usuario']['nome']}
+                Data Nascimento:\t{conta['usuario']['data_nascimento']}
+                CPF:\t\t{conta['usuario']['cpf']}
+                Endereço:\t{conta['usuario']['endereco']}
+       
+            """
+            print("=" * 100)
+            print(textwrap.dedent(linha))
+
 
 
 def main():
@@ -115,14 +132,15 @@ def main():
     contas = []
 
     while True:
+
         opcao = menu()
 
-        if opcao == "d":
+        if opcao.lower() == "d":
             valor = float(input("Informe o valor do depósito: "))
 
             saldo, extrato = depositar(saldo, valor, extrato)
 
-        elif opcao == "s":
+        elif opcao.lower() == "s":
             valor = float(input("Informe o valor do saque: "))
 
             saldo, extrato = sacar(
@@ -134,23 +152,27 @@ def main():
                 limite_saques=LIMITE_SAQUES,
             )
 
-        elif opcao == "e":
+        elif opcao.lower() == "e":
             exibir_extrato(saldo, extrato=extrato)
 
-        elif opcao == "nu":
+        elif opcao.lower() == "nu":
             criar_usuario(usuarios)
 
-        elif opcao == "nc":
+        elif opcao.lower() == "nc":
             numero_conta = len(contas) + 1
             conta = criar_conta(AGENCIA, numero_conta, usuarios)
 
             if conta:
                 contas.append(conta)
 
-        elif opcao == "lc":
+        elif opcao.lower() == "lc":
             listar_contas(contas)
+        
+        elif opcao.lower() == "le":
+            listar_dados_cadastrais(contas)
 
-        elif opcao == "q":
+
+        elif opcao.lower() == "q":
             break
 
         else:
